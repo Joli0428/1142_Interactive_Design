@@ -18,7 +18,6 @@ export default function Home() {
         </ul>
       </div>
 
-      {/* 利用 Next.js 的 Link 組件進行路由跳轉 */}
       <Link 
         href="/stage"
         className="px-10 py-5 bg-white text-zinc-900 text-2xl font-black rounded-full hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.3)]"
