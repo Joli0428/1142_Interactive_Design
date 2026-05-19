@@ -62,10 +62,10 @@ export function useHandConductor(synths: Record<AnimalId, AnimalSynth> | null) {
           if (currentlyPlayingRef.current) {
             releaseAnimal(s[currentlyPlayingRef.current]);
           }
-          attackAnimal(chain, frequency);
+          attackAnimal(chain, frequency, animal);
           currentlyPlayingRef.current = animal;
         } else {
-          rampAnimal(chain, frequency);
+          rampAnimal(chain, frequency, animal);
         }
       } else if (currentlyPlayingRef.current) {
         releaseAnimal(s[currentlyPlayingRef.current]);

@@ -39,13 +39,13 @@ export function PitchScaleStrip({
 
   return (
     <div
-      className="stage-pitch-rail pointer-events-none absolute right-2 z-40 w-11 md:right-4 md:w-14"
+      className="stage-pitch-rail pointer-events-none absolute right-2 z-[45] w-12 md:right-4 md:w-[3.75rem]"
       style={{
         top: `${PITCH_ZONE_TOP * 100}%`,
         height: `${ZONE_SPAN * 100}%`,
       }}
     >
-      <div className="relative h-full w-full">
+      <div className="stage-pitch-rail-panel relative h-full w-full rounded-l-md py-1 pl-1">
         {SCALE_NOTES.map((note, i) => {
           const isActive = i === activeIndex;
           const band = zoneBandStyle(i);
@@ -60,15 +60,15 @@ export function PitchScaleStrip({
                 className={`flex h-full items-center justify-center rounded-sm border px-0.5 transition-all duration-150 ${
                   isActive
                     ? isPinching
-                      ? "border-amber-400/45 bg-amber-500/18 text-amber-100/95"
+                      ? "border-amber-400/65 bg-amber-500/28 text-amber-50 shadow-[0_0_12px_rgba(251,191,36,0.2)]"
                       : isPreview
-                        ? "border-amber-400/30 bg-amber-500/8 text-amber-100/80"
-                        : "border-white/18 bg-white/6 text-white/85"
-                    : "border-white/5 bg-black/12 text-white/22"
+                        ? "border-amber-400/45 bg-amber-500/14 text-amber-100"
+                        : "border-white/25 bg-white/10 text-white"
+                    : "border-white/8 bg-black/25 text-white/38"
                 }`}
               >
                 <span
-                  className={`font-medium tabular-nums tracking-tight ${
+                  className={`font-medium tabular-nums tracking-tight [text-shadow:0_1px_6px_rgba(0,0,0,0.85)] ${
                     isActive ? "text-[10px] md:text-xs" : "text-[9px] md:text-[10px]"
                   }`}
                 >
@@ -85,10 +85,10 @@ export function PitchScaleStrip({
             style={{ top: `${thumbRailPercent}%` }}
           >
             <div
-              className={`h-1.5 w-1.5 rounded-full border ${
+              className={`h-2 w-2 rounded-full border-2 ${
                 isPinching
-                  ? "border-amber-200/80 bg-amber-400/90 shadow-[0_0_6px_rgba(251,191,36,0.5)]"
-                  : "border-amber-300/50 bg-amber-400/40"
+                  ? "border-amber-100 bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.65)]"
+                  : "border-amber-300/70 bg-amber-400/55"
               }`}
             />
           </div>

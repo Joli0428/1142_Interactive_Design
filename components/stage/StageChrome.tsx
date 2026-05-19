@@ -7,7 +7,6 @@ type Props = {
   isPinching: boolean;
   volume: number;
   onVolumeChange: (percent: number) => void;
-  achievement: string | null;
 };
 
 export function StageChrome({
@@ -15,7 +14,6 @@ export function StageChrome({
   isPinching,
   volume,
   onVolumeChange,
-  achievement,
 }: Props) {
   return (
     <div
@@ -41,12 +39,6 @@ export function StageChrome({
           {isPinching ? "演奏中" : "捏合演奏 · 放開休止"}
         </span>
       </div>
-
-      {achievement && (
-        <p className="pointer-events-none absolute bottom-8 left-1/2 max-w-sm -translate-x-1/2 text-center text-sm font-medium text-amber-200/90 animate-[fade-cue_3s_ease-out_forwards]">
-          {achievement}
-        </p>
-      )}
 
       <label className="pointer-events-auto absolute bottom-6 right-6 flex w-32 items-center gap-2 rounded-full border border-white/10 bg-black/45 px-3 py-2 backdrop-blur-sm">
         <span className="sr-only">音量</span>

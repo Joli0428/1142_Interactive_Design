@@ -25,13 +25,10 @@ import type { AnimalId } from "@/lib/conductor/types";
 
 const IDLE_MS = 90_000;
 const CHROME_HIDE_MS = 4_000;
-const ANIMALS: AnimalId[] = ["frog", "otter", "bird"];
-
 export default function Stage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const synthsRef = useRef<Record<AnimalId, AnimalSynth> | null>(null);
-  const playedAnimalsRef = useRef<Set<AnimalId>>(new Set());
   const lastActivityRef = useRef(0);
   const lowFpsCountRef = useRef(0);
   const bootStartedRef = useRef(false);
@@ -44,7 +41,6 @@ export default function Stage() {
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [showHud, setShowHud] = useState(false);
   const [showChrome, setShowChrome] = useState(true);
-  const [achievement, setAchievement] = useState<string | null>(null);
   const [useLowQuality, setUseLowQuality] = useState(false);
   const [animalCenterX, setAnimalCenterX] = useState(600);
   const [volume, setVolume] = useState(75);
@@ -100,25 +96,11 @@ export default function Stage() {
     return () => window.clearTimeout(t);
   }, [fromHome, isAudioReady]);
 
-  const trackAnimalPlayed = useCallback((animal: AnimalId) => {
-    playedAnimalsRef.current.add(animal);
-    if (playedAnimalsRef.current.size >= 3) {
-      setAchievement("指揮大師：三位團員都登場了");
-    }
-  }, []);
-
   useEffect(() => {
     if (state.isPinching) {
-      trackAnimalPlayed(state.activeAnimal);
       touchActivity();
     }
-  }, [state.isPinching, state.activeAnimal, trackAnimalPlayed, touchActivity]);
-
-  useEffect(() => {
-    if (!achievement) return;
-    const t = setTimeout(() => setAchievement(null), 4000);
-    return () => clearTimeout(t);
-  }, [achievement]);
+  }, [state.isPinching, touchActivity]);
 
   useEffect(() => {
     if (!isAudioReady) return;
@@ -376,7 +358,6 @@ export default function Stage() {
             isPinching={state.isPinching}
             volume={volume}
             onVolumeChange={handleVolumeChange}
-            achievement={achievement}
           />
 
           {cameraError && (
